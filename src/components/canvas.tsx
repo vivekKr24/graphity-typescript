@@ -43,7 +43,7 @@ export function Canvas() {
             let canvas_x = canvas!!.getBoundingClientRect().x
             let canvas_y = canvas!!.getBoundingClientRect().y
 
-            OnCanvasClick(mouse_x, mouse_y, canvas_x, canvas_y)
+            OnCanvasClick(mouse_x, mouse_y, canvas_x, canvas_y, e.shiftKey)
 
             RenderToCanvas(canvas!!.getContext("2d")!!)
         })
@@ -75,10 +75,6 @@ function OnCanvasClick(mouse_x: number, mouse_y: number, canvas_x: number, canva
     
     // Select / Deselect node or edge  
     let t = EventSystem.SelectNode(x_rel, y_rel, shiftKey)
-    if (t !== -1) {
-        let dist = (x_rel - ObjectTracker.GetNodeList()[t].GetX()) * (x_rel - ObjectTracker.GetNodeList()[t].GetX()) + (y_rel - ObjectTracker.GetNodeList()[t].GetY()) * (y_rel - ObjectTracker.GetNodeList()[t].GetY())
-        console.log(dist)
-    }
     console.log("Canvas Clicked at node ", t, x_rel, y_rel, )
     if (t === - 1) {
         EventSystem.SelectEdge(x_rel, y_rel, shiftKey)
@@ -95,5 +91,5 @@ function OnCanvasHover(mouse_x: number, mouse_y: number, canvas_x: number, canva
 
 function ShowNodeDetails(x_rel: number, y_rel: number) {
     // SHow
-    EventSystem.GetNodeDetails(x_rel, y_rel)
+    // EventSystem.GetNodeDetails(x_rel, y_rel)
 }
