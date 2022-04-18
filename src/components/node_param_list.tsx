@@ -1,4 +1,5 @@
-// Add or remove node parameters
-export function NodeParamList() {
-    
+export interface NodeParam {
+    node_label: String | null
+    id: number
+    desc: String | null
 }
