@@ -1,12 +1,17 @@
+import { NodeParam } from "../../components/node_param_list";
 import { ObjectTracker } from "./object_tracker"
 
 export class EventSystem {
     private static node_selected: number = -1
     private static edge_selected: number[] = [-1, -1]
-    private static node_label: String[] = []
+    // public static node_details: NodeParam[] = []
 
     public static GetSelectedNode() {
         return this.node_selected;
+    }
+
+    public static GetSelectedEdge() {
+        return this.edge_selected;
     }
     
     public static SelectNode(x: number, y: number, shiftKey = false): number {
@@ -20,6 +25,7 @@ export class EventSystem {
             // Create undirected edge between node at (x, y) and selected_node
             ObjectTracker.AddEdgeWithID(node_clicked, this.node_selected)
             ObjectTracker.AddEdgeWithID(this.node_selected, node_clicked)
+            console.log('Created edge', node_clicked, this.node_selected)
             this.Deselect()
             //Return -2 when edge created
             return -2
@@ -58,11 +64,15 @@ export class EventSystem {
         }
     }
 
-    public static GetNodeDetails(x_rel: number, y_rel: number) {
-        let t = ObjectTracker.GetNodeId(x_rel, y_rel)
-        if (t !== -1) return ObjectTracker.GetNodeList()[t]
-        return {}
-    }
+    // public static GetNodeDetails(x_rel: number, y_rel: number): NodeParam | null {
+    //     let t = ObjectTracker.GetNodeId(x_rel, y_rel)
+    //     if (t !== -1) return this.node_details[t]
+    //     return null
+    // }
+
+    // public static GetNodeDetailsByID(id: number) : NodeParam {
+    //     return this.node_details[id]
+    // }
 
     public static Deselect() {
         this.node_selected = -1

@@ -1,4 +1,5 @@
 import {GraphNode} from "../GUI_Objects/GraphNode"
+import { EventSystem } from "./event_system"
 
 export class ObjectTracker {
     private static node_list: GraphNode[] = []
@@ -44,7 +45,11 @@ export class ObjectTracker {
     }
 
     public static AddNode(x: number, y: number) {
-        this.node_list = [...this.node_list, new GraphNode(x, y, this.node_list.length)]
+        // let label = prompt("Node label", "No Label")
+        // let desc = prompt("Node Desc")
+        let id = this.node_list.length
+        // EventSystem.node_details = [...EventSystem.node_details, {node_label: label, id: id, desc: desc}]
+        this.node_list = [...this.node_list, new GraphNode(x, y, id)]
         this.adjList = [...this.adjList, []]
     }
 

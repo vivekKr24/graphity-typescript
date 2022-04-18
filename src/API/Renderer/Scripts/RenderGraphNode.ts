@@ -8,6 +8,7 @@ function RenderGraphNode(node: GraphNode, ctx: CanvasRenderingContext2D) {
     // ctx.drawImage(image, x, y)
     ctx.beginPath()
     ctx.arc(x, y, 40, 0, Math.PI * 2)
+    ctx.fill()
     ctx.closePath()
     ctx.stroke()
 }
