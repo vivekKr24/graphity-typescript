@@ -6,7 +6,7 @@ function DrawEdge(ctx: CanvasRenderingContext2D, node1: GraphNode, node2: GraphN
     ctx.strokeStyle = "10px"
     ctx.moveTo(node1.GetX(), node1.GetY())
     ctx.lineTo(node2.GetX(), node2.GetY())
-    ctx.stroke
+    ctx.stroke()
 
     // console.log(node1.id, node2.id)
 
