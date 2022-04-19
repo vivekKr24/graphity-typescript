@@ -27,16 +27,20 @@ function NodeList( {node_id, edge_list}: node_edge_list ) {
         })
     })
 
+    let edge_node_id_list: JSX.Element[] = []
+
+    edge_list_.forEach((val) => {
+        edge_node_id_list = [...edge_node_id_list, <td className="edge_node_id"> { val } </td>]
+    })
+
 
     return (
         <>
             <tr>
-                <td>
-                    { node_id } {"=>"} 
+                <td className="node_id">
+                    { node_id } {": "} 
                 </td>
-                <td>
-                    { edge_list_ }
-                </td>
+                {edge_node_id_list}
             </tr>
         </>
     )
@@ -69,8 +73,10 @@ export function AdjecencyListView() {
     })
 
     return (
-        <>
-            {list}
-        </>
+        <div id="adj-list-view">
+            <table>
+                {list}
+            </table>
+        </div>
     )
 }
