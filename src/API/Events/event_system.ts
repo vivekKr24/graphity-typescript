@@ -23,7 +23,10 @@ export class EventSystem {
         let node_clicked = ObjectTracker.GetNodeId(x, y)
 
         //Return -1 when no node hit with mouse
-        if (node_clicked === -1) return -1
+        if (node_clicked === -1) {
+            this.Deselect()
+            return -1
+        }
 
         if (create_edge && shiftKey) {
             // Create undirected edge between node at (x, y) and selected_node
