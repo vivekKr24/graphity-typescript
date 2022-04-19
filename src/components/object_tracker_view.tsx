@@ -7,7 +7,7 @@ export function ObjectTrackerView() {
 
     useEffect(() => {
         let canvas = document.querySelector("canvas")
-        canvas?.addEventListener('click', (e) => {
+        canvas?.addEventListener('mousemove', (e) => {
             setTimeout(() => {
 
                 let mouse_x = e.clientX
