@@ -13,6 +13,10 @@ export class EventSystem {
     public static GetSelectedEdge() {
         return this.edge_selected;
     }
+
+    public static SetSelectedNode(id: number) {
+        return this.node_selected = id;
+    }
     
     public static SelectNode(x: number, y: number, shiftKey = false): number {
         let create_edge = this.node_selected !== -1
