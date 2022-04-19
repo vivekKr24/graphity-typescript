@@ -3,6 +3,7 @@ import { ObjectTracker } from "./object_tracker"
 
 export class EventSystem {
     private static node_selected: number = -1
+    private static hovered_node: number = -1
     private static edge_selected: number[] = [-1, -1]
     // public static node_details: NodeParam[] = []
 
@@ -12,6 +13,14 @@ export class EventSystem {
 
     public static GetSelectedEdge() {
         return this.edge_selected;
+    }
+
+    public static GetHoveredNode() {
+        return this.hovered_node;
+    }
+
+    public static SetHoveredNode(i: number) {
+        return this.hovered_node = i;
     }
 
     public static SetSelectedNode(id: number) {

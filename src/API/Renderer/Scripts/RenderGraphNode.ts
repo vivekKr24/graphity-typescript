@@ -3,6 +3,7 @@ import { GraphNode } from "../../GUI_Objects/GraphNode";
 
 function RenderGraphNode(node: GraphNode, ctx: CanvasRenderingContext2D) {
     if (EventSystem.GetSelectedNode() === node.id) ctx.fillStyle = 'green'
+    if (EventSystem.GetHoveredNode() === node.id) ctx.fillStyle = 'yellow'
     let x = node.GetX()
     let y = node.GetY()
     ctx.beginPath()

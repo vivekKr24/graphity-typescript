@@ -7,9 +7,8 @@ import { RenderToCanvas } from "../API/Renderer/Scripts/RendererMain"
 export function Canvas() {
     useEffect(() => {
         let canvas = document.querySelector("canvas")
-        canvas!!.width = 1280
-        canvas!!.height = 720
-        canvas!!.style.backgroundColor = "red"
+        canvas!!.width = 1920
+        canvas!!.height = 1080
 
         // Add event listeners
         window!!.addEventListener("dblclick", (e) => {
@@ -49,26 +48,50 @@ export function Canvas() {
         })
 
         window!!.addEventListener("mousemove", (e) => {
+            e.stopImmediatePropagation()
+
+            let mouse_x = e.clientX
+            let mouse_y = e.clientY
+            let canvas_x = canvas!!.getBoundingClientRect().x
+            let canvas_y = canvas!!.getBoundingClientRect().y
+
+            let rel_x = mouse_x - canvas_x
+            let rel_y = mouse_y - canvas_y
+            let t = ObjectTracker.GetNodeId(rel_x, rel_y)
             if (e.altKey){
-                e.stopImmediatePropagation()
-
-                let mouse_x = e.clientX
-                let mouse_y = e.clientY
-                let canvas_x = canvas!!.getBoundingClientRect().x
-                let canvas_y = canvas!!.getBoundingClientRect().y
-
-                let rel_x = mouse_x - canvas_x
-                let rel_y = mouse_y - canvas_y
-
-                let t = ObjectTracker.GetNodeId(rel_x, rel_y)
-
                 if (t !== -1) {
                     ObjectTracker.GetNodeList()[t].SetX(rel_x)
                     ObjectTracker.GetNodeList()[t].SetY(rel_y)
                 }
 
+                // OnCanvasClick(mouse_x, mouse_y, canvas_x, canvas_y, e.shiftKey)
                 RenderToCanvas(canvas!!.getContext("2d")!!)
+                return
             }
+            
+            if (t !== -1) {
+                canvas!!.title = "Node id: " + t.toString() 
+                EventSystem.SetHoveredNode(t)
+            }else {
+                canvas!!.title = "Drawing area"
+                EventSystem.SetHoveredNode(t)
+            }
+            RenderToCanvas(canvas!!.getContext("2d")!!)
+        })
+
+        canvas!!.addEventListener('mouseover', (e) => {
+            e.stopImmediatePropagation()
+
+            let mouse_x = e.clientX
+            let mouse_y = e.clientY
+            let canvas_x = canvas!!.getBoundingClientRect().x
+            let canvas_y = canvas!!.getBoundingClientRect().y
+
+            let rel_x = mouse_x - canvas_x
+            let rel_y = mouse_y - canvas_y
+            
+            let t = ObjectTracker.GetNodeId(rel_x, rel_y)
+            
         })
 
         
@@ -103,13 +126,6 @@ function OnCanvasClick(mouse_x: number, mouse_y: number, canvas_x: number, canva
         EventSystem.SelectEdge(x_rel, y_rel, shiftKey)
     }
     // if shift was held, and new node selected,then join with prev one
-}
-
-function OnCanvasHover(mouse_x: number, mouse_y: number, canvas_x: number, canvas_y: number) {
-    let x_rel = mouse_x - canvas_x
-    let y_rel = mouse_y - canvas_y
-
-    ShowNodeDetails(x_rel, y_rel)
 }
 
 function ShowNodeDetails(x_rel: number, y_rel: number) {
