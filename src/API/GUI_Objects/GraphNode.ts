@@ -1,6 +1,6 @@
 export class GraphNode {
-    private readonly x
-    private readonly y
+    private x
+    private y
     public readonly id: number
     public static radius = 40
     public NodeInfo = {}
@@ -12,8 +12,7 @@ export class GraphNode {
     }
 
     //Event functions
-    
-    public static OnClick(click_x: number, click_y: number) {
+        public static OnClick(click_x: number, click_y: number) {
         
     }
 
@@ -24,5 +23,13 @@ export class GraphNode {
 
     public GetY(): number {
         return this.y
+    }
+
+    public SetX(x: number): number {
+        return this.x = x
+    }
+
+    public SetY(y: number): number {
+        return this.y = y
     }
 }

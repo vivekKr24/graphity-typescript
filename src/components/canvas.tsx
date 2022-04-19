@@ -48,6 +48,29 @@ export function Canvas() {
             RenderToCanvas(canvas!!.getContext("2d")!!)
         })
 
+        window!!.addEventListener("mousemove", (e) => {
+            if (e.altKey){
+                e.stopImmediatePropagation()
+
+                let mouse_x = e.clientX
+                let mouse_y = e.clientY
+                let canvas_x = canvas!!.getBoundingClientRect().x
+                let canvas_y = canvas!!.getBoundingClientRect().y
+
+                let rel_x = mouse_x - canvas_x
+                let rel_y = mouse_y - canvas_y
+
+                let t = ObjectTracker.GetNodeId(rel_x, rel_y)
+
+                if (t !== -1) {
+                    ObjectTracker.GetNodeList()[t].SetX(rel_x)
+                    ObjectTracker.GetNodeList()[t].SetY(rel_y)
+                }
+
+                RenderToCanvas(canvas!!.getContext("2d")!!)
+            }
+        })
+
         
     })
 
