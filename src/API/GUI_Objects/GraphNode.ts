@@ -11,11 +11,6 @@ export class GraphNode {
         this.y = y
     }
 
-    //Event functions
-        public static OnClick(click_x: number, click_y: number) {
-        
-    }
-
     // Utility functions
     public GetX(): number {
         return this.x
