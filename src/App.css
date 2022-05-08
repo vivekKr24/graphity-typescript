@@ -78,3 +78,7 @@ td {
   height: fit-content;
   display: block;
 }
+
+option{
+  font-family: monospace;
+}
