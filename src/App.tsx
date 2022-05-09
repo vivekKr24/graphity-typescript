@@ -8,6 +8,7 @@ import { DownloadGraph } from './components/download_graph';
 
 function App() {
   return (
+    <>
     <div className="App">
       <div id='draw-area'>
         <Canvas/>
@@ -16,9 +17,10 @@ function App() {
       <div id='stat-area'>
         <ObjectTrackerView/>
         <AdjecencyListView/>
-        <DownloadGraph/>
       </div>
     </div>
+    <DownloadGraph/>
+    </>
   );
 }
 

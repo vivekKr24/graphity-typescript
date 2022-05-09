@@ -1,21 +1,19 @@
 import { useEffect } from "react";
-import { ToCPPveclist, ToCPPvecvecMatrix, ToJSON, ToPythonDictAdjMatrix, ToPythonListAdjMatrix, ToPythonListMatrix } from "../API/DataTypes/adjListConvertor";
+import { CreateTXT, GetString } from "../API/DataTypes/adjListConvertor";
 import { ObjectTracker } from "../API/Events/object_tracker";
 
 export function DownloadGraph() {
     function OnSelectExportOption(e: Event) {
-        let sel: any = e.target
-        switch (sel.value) {
-            default:
-                console.log("list adjmatrix:", ToPythonListAdjMatrix(ObjectTracker.GetAdjList()))
-                console.log("dict:", ToPythonDictAdjMatrix(ObjectTracker.GetAdjList()))
-                console.log("veclist:", ToCPPveclist(ObjectTracker.GetAdjList()))
-                console.log("veclist:", ToCPPveclist(ObjectTracker.GetAdjList()))
-                console.log("list adjlist:", ToPythonListMatrix(ObjectTracker.GetAdjList()))
-                console.log("json:", ToJSON(ObjectTracker.GetAdjList()))
-                
-                break;
-        }
+        let sel: any = e.target;
+        // Set preview
+        let val = sel.value;
+        console.log(GetString(val))
+        console.log(document.querySelector("textarea"))
+        document.querySelector("textarea")!!.value = GetString(val)
+    }
+
+    function Download() {
+        CreateTXT(GetString(document.querySelector("select")!!.value), document.querySelector("select")!!.value)
     }
 
     useEffect(() => {
@@ -27,6 +25,7 @@ export function DownloadGraph() {
         <div>
             <label htmlFor="select_export_type"></label>
             <select name="select_export_type" id="select_export_type_id">
+                    <option label="Select format" value="none" selected disabled></option>
                     <optgroup label="Python Data Types">
                         <option value="python_2d_list_m">
                             Python 2D List (Adj Matrix)
@@ -34,7 +33,7 @@ export function DownloadGraph() {
                         <option value="python_2d_list_l">
                             Python 2D List (Adj List)
                         </option>
-                        <option value="python dictionary">
+                        <option value="python_dict">
                             Python Dictionary (Adj List)
                         </option>
                     </optgroup>
@@ -51,6 +50,8 @@ export function DownloadGraph() {
                     <option value="json"> GarphQL graph {"<Test this>"} </option>
                 </optgroup>
             </select>
+            <textarea value={"Select format"} rows={15} cols={30} id="download_preview" style={{ overflow:"scroll", resize: "none", tabSize:"4"}}> </textarea>
+            <button onClick={(e) => {Download()}}> DOWNLOAD TEXT FORMAT </button>
         </div>
     )
 }

@@ -74,7 +74,7 @@ export function AdjecencyListView() {
 
     return (
         <div id="adj-list-view">
-            <table>
+            <table id="adjlist-table">
                 {list}
             </table>
         </div>
