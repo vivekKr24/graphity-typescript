@@ -64,7 +64,20 @@ export function AdjecencyListView() {
             
             setAdjList(ObjectTracker.GetAdjList())
         })
-    })
+
+        document.getElementById("adj-list-view")?.addEventListener('click', e => {
+            let v: any = document.querySelector('select#select_export_type_id')
+            if (v.value === "none") {
+                v.focus()
+            }
+
+            else {
+                document.querySelector('textarea')?.focus()
+            }
+
+            console.log(v.value)
+        })
+    }) 
 
     let list: JSX.Element[] = []
 
