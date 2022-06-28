@@ -13,6 +13,10 @@ export function DownloadGraph() {
     }
 
     function Download() {
+        let v: any = document.querySelector('select#select_export_type_id')
+        if (v.value === "none") {
+            return
+        }
         CreateTXT(GetString(document.querySelector("select")!!.value), document.querySelector("select")!!.value)
     }
 

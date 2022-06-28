@@ -4,13 +4,14 @@ function DrawEdge(ctx: CanvasRenderingContext2D, node1: GraphNode, node2: GraphN
     let prevStroke = ctx.strokeStyle
     
     ctx.beginPath()
-    ctx.lineWidth = 3
-    ctx.strokeStyle = 'red'
+    ctx.lineWidth = 2
+    ctx.strokeStyle = 'grey'
     ctx.moveTo(node1.GetX(), node1.GetY())
     ctx.lineTo(node2.GetX(), node2.GetY())
     ctx.stroke()
     ctx.strokeStyle = 'black'
     ctx.closePath()
+    ctx.lineWidth = 1
     ctx.strokeStyle = prevStroke
 }
 
